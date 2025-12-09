@@ -10,6 +10,34 @@ private:
     vector<int> pages;
     int numFrames;
 
+    void printFrameState(int step, int page, const vector<int>& frames, bool hit) {
+        cout << "| " << setw(4) << step << " | " << setw(4) << page << " | ";
+        for (int i = 0; i < numFrames; i++) {
+            if (i < frames.size()) {
+                cout << setw(3) << frames[i] << " |";
+            } else {
+                cout << "  -  |";
+            }
+        }
+        if (hit) cout << " Hit  |" << endl;
+        else     cout << " Miss |" << endl;
+    }
+
+
+    void printHeader() {
+        cout << "+------+------+";
+        for (int i = 0; i < numFrames; i++) cout << "-----+";
+        cout << "------+" << endl;
+        
+        cout << "| Step | Page |";
+        for (int i = 0; i < numFrames; i++) cout << " F" << i + 1 << "  |";
+        cout << " Stat |" << endl;
+
+        cout << "+------+------+";
+        for (int i = 0; i < numFrames; i++) cout << "-----+";
+        cout << "------+" << endl;
+    }
+
 public:
     void input() {
         int n, val;
