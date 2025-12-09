@@ -194,6 +194,24 @@ public:
 };
 
 int main() {
-    cout << "OS Project Initialized..." << endl;
+    PageReplacementSimulator sim;
+    cout << "==========================================\n";
+    cout << "  OS Project: Page Replacement Simulator  \n";
+    cout << "==========================================\n";
+    sim.input();
+
+    int choice;
+    do {
+        cout << "\nSelect Algorithm to Run:\n";
+        cout << "1. FIFO\n2. LRU\n3. Optimal\n4. Run All\n5. Exit\n";
+        cout << "Enter Choice: ";
+        cin >> choice;
+        switch(choice) {
+            case 1: sim.runFIFO(); break;
+            case 2: sim.runLRU(); break;
+            case 3: sim.runOptimal(); break;
+            case 4: sim.runFIFO(); sim.runLRU(); sim.runOptimal(); break;
+        }
+    } while (choice != 5);
     return 0;
 }
