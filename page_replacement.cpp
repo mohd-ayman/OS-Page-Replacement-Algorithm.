@@ -52,7 +52,40 @@ public:
             pages.push_back(val);
         }
     }
-    void runFIFO() {}
+    void runFIFO() {
+        cout << "\n\n=== FIFO Algorithm Simulation ===\n";
+        printHeader();
+
+        vector<int> frames;
+        int pageFaults = 0;
+        int hitCount = 0;
+        int insertIndex = 0;
+
+        for (int i = 0; i < pages.size(); i++) {
+            int currentPage = pages[i];
+            bool hit = false;
+
+            for (int f : frames) {
+                if (f == currentPage) {
+                    hit = true;
+                    hitCount++;
+                    break;
+                }
+            }
+
+            if (!hit) {
+                if (frames.size() < numFrames) {
+                    frames.push_back(currentPage);
+                } else {
+                    frames[insertIndex] = currentPage;
+                    insertIndex = (insertIndex + 1) % numFrames;
+                }
+                pageFaults++;
+            }
+            printFrameState(i + 1, currentPage, frames, hit);
+        }
+        printStats(pageFaults, hitCount);
+    }
     void runLRU() {}
     void runOptimal() {}
 };
