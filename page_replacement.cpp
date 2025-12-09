@@ -86,7 +86,45 @@ public:
         }
         printStats(pageFaults, hitCount);
     }
-    void runLRU() {}
+
+    void runLRU() {
+        cout << "\n\n=== LRU Algorithm Simulation ===\n";
+        printHeader();
+
+        vector<int> frames;
+        int pageFaults = 0;
+        int hitCount = 0;
+
+        for (int i = 0; i < pages.size(); i++) {
+            int currentPage = pages[i];
+            bool hit = false;
+            int hitIndex = -1;
+
+            for (int j = 0; j < frames.size(); j++) {
+                if (frames[j] == currentPage) {
+                    hit = true;
+                    hitIndex = j;
+                    hitCount++;
+                    break;
+                }
+            }
+
+            if (hit) {
+                frames.erase(frames.begin() + hitIndex);
+                frames.push_back(currentPage);
+            } else {
+                pageFaults++;
+                if (frames.size() < numFrames) {
+                    frames.push_back(currentPage);
+                } else {
+                    frames.erase(frames.begin());
+                    frames.push_back(currentPage);
+                }
+            }
+            printFrameState(i + 1, currentPage, frames, hit);
+        }
+        printStats(pageFaults, hitCount);
+    }
     void runOptimal() {}
 };
 
