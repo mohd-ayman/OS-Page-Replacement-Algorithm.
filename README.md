@@ -1,23 +1,27 @@
-📖 Project Overview.
-This project is a C++ based simulation tool designed to visualize and analyze the efficiency of various Page Replacement Algorithms used in Operating Systems.
+# Efficient Page Replacement Algorithm Simulator
 
-In a system with limited physical memory (Frames), the OS must decide which page to swap out when a new page (Page Fault) needs to be loaded. This simulator implements the three most fundamental algorithms to demonstrate this decision-making process:
+## Project Overview
+This project is a CLI-based simulation tool designed to demonstrate and compare the efficiency of various **Page Replacement Algorithms** used in Operating Systems memory management. It visualizes how pages are swapped in and out of memory frames and calculates the **Hit Ratio** and **Page Faults** for each algorithm.
 
-FIFO (First-In, First-Out)
+## ⚙️ Algorithms Implemented
+1.  **FIFO (First-In, First-Out):** Replaces the oldest page in memory.
+2.  **LRU (Least Recently Used):** Replaces the page that hasn't been used for the longest time.
+3.  **Optimal:** Replaces the page that will not be used for the longest duration in the future (theoretical benchmark).
 
-LRU (Least Recently Used)
+## 🛠️ Technologies Used
+* **Language:** C++ (Standard Template Library)
+* **Tools:** VS Code, Git/GitHub
 
-Optimal (Future Lookahead)
 
-The tool provides a step-by-step visual table of memory states, highlights Hits vs. Misses, and calculates performance metrics like Hit Ratio and Total Page Faults.
+## 📊 Sample Output
+The program generates a step-by-step visual table in the terminal:
 
-Key Features.
-Menu-Driven Interface: User-friendly CLI to select and run specific algorithms.
-
-Dynamic Inputs: Supports custom input for the number of Frames and Reference Strings.
-
-Visual Simulation: Displays the content of memory frames at every step of execution.
-
-Performance Metrics: Automatically calculates and compares the efficiency (Hit Ratio) of different algorithms.
-
-Comparative Mode: "Run All" feature to compare FIFO, LRU, and Optimal side-by-side.
+```text
+| Step | Page |  F1 |  F2 |  F3 | Status |
+|    1 |    7 |   7 |   - |   - |   Miss |
+|    2 |    0 |   7 |   0 |   - |   Miss |
+|    3 |    1 |   7 |   0 |   1 |   Miss |
+|    4 |    2 |   2 |   0 |   1 |   Miss |
+...
+Total Page Faults: 7
+Hit Ratio: 25.00%
