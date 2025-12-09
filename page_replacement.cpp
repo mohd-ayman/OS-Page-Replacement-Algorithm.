@@ -125,7 +125,72 @@ public:
         }
         printStats(pageFaults, hitCount);
     }
-    void runOptimal() {}
+    void runOptimal() {
+        cout << "\n\n=== Optimal Algorithm Simulation ===\n";
+        printHeader();
+
+        vector<int> frames;
+        int pageFaults = 0;
+        int hitCount = 0;
+
+        for (int i = 0; i < pages.size(); i++) {
+            int currentPage = pages[i];
+            bool hit = false;
+
+            for (int f : frames) {
+                if (f == currentPage) {
+                    hit = true;
+                    hitCount++;
+                    break;
+                }
+            }
+
+            if (!hit) {
+                pageFaults++;
+                if (frames.size() < numFrames) {
+                    frames.push_back(currentPage);
+                } else {
+                    int farthestIndex = -1;
+                    int frameToReplace = -1;
+
+                    for (int j = 0; j < frames.size(); j++) {
+                        int currentFrameVal = frames[j];
+                        int nextUseIndex = -1;
+
+                        for (int k = i + 1; k < pages.size(); k++) {
+                            if (pages[k] == currentFrameVal) {
+                                nextUseIndex = k;
+                                break;
+                            }
+                        }
+
+                        if (nextUseIndex == -1) {
+                            frameToReplace = j;
+                            break; 
+                        }
+
+                        if (nextUseIndex > farthestIndex) {
+                            farthestIndex = nextUseIndex;
+                            frameToReplace = j;
+                        }
+                    }
+                    if (frameToReplace == -1) frameToReplace = 0;
+                    frames[frameToReplace] = currentPage;
+                }
+            }
+            printFrameState(i + 1, currentPage, frames, hit);
+        }
+        printStats(pageFaults, hitCount);
+    }
+    void printStats(int faults, int hits) {
+        int total = faults + hits;
+        cout << "+------+------+";
+        for (int i = 0; i < numFrames; i++) cout << "-----+";
+        cout << "------+" << endl;
+        cout << "Total Page Faults: " << faults << endl;
+        cout << "Total Page Hits: " << hits << endl;
+        cout << "Hit Ratio: " << fixed << setprecision(2) << ((double)hits / total) * 100 << "%" << endl;
+    }
 };
 
 int main() {
