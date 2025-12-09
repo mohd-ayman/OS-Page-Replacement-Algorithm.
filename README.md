@@ -6,7 +6,7 @@ This project is a CLI-based simulation tool designed to demonstrate and compare 
 ## ⚙️ Algorithms Implemented
 1.  **FIFO (First-In, First-Out):** Replaces the oldest page in memory.
 2.  **LRU (Least Recently Used):** Replaces the page that hasn't been used for the longest time.
-3.  **Optimal:** Replaces the page that will not be used for the longest duration in the future (theoretical benchmark).
+3.  **Optimal:** Replaces the page that will not be used for the longest duration in the future.
 
 ## 🛠️ Technologies Used
 * **Language:** C++ (Standard Template Library)
