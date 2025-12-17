@@ -10,7 +10,7 @@ This project is a CLI-based simulation tool designed to demonstrate and compare 
 
 ## 🛠️ Technologies Used
 * **Language:** C++ (Standard Template Library)
-* **Tools:** VS Code, Git/GitHub
+* **Tools:** VS Code, Git/GitHub.
 
 
 ## 📊 Sample Output
